@@ -1,0 +1,9 @@
+framework:
+  http_client:
+    scoped_clients:
+      heimdall.client:
+        base_uri: '%env(resolve:HEIMDALL_HOST)%'
+        headers:
+          X-AUTH-TOKEN: '%env(resolve:HEIMDALL_API_KEY)%'
+      backend.client:
+        base_uri: '%env(resolve:BACKEND_HOST)%'

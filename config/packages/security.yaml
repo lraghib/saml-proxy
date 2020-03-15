@@ -1,0 +1,31 @@
+security:
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        heimdall_provider:
+            id: App\Security\Heimdall\UserProvider
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            anonymous: true
+            provider: heimdall_provider
+            saml:
+                username_attribute: '%env(resolve:SAML_USERNAME_ATTRIBUTE)%'
+                check_path: /saml/acs
+                login_path: /saml/login
+                always_use_default_target_path: '%env(bool:SAML_ALWAYS_USE_DEFAULT_TARGET_PATH)%'
+                default_target_path: /saml/redirect
+            logout:
+                path: /saml/logout
+                target: /saml/login
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        - { path: ^/saml/is-logged-in, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/saml/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/saml/metadata, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: IS_AUTHENTICATED_FULLY }

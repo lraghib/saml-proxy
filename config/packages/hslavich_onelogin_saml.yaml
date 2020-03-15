@@ -1,0 +1,35 @@
+hslavich_onelogin_saml:
+  # Basic settings
+  baseurl: '%env(resolve:APP_HOST)%/saml'
+  idp:
+    entityId: '%env(resolve:SAML_IDP_HOST)%/%env(resolve:SAML_IDP_METADATA_URI)%'
+    singleSignOnService:
+      url: '%env(resolve:SAML_IDP_HOST)%/%env(resolve:SAML_IDP_SSO_URI)%'
+      binding: 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect'
+    singleLogoutService:
+      url: '%env(resolve:SAML_IDP_HOST)%/%env(resolve:SAML_IDP_SLO_URI)%'
+      binding: 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect'
+    x509cert: '%env(resolve:SAML_IDP_X509CERT)%'
+  sp:
+    entityId: '%env(resolve:APP_HOST)%/saml/metadata'
+    assertionConsumerService:
+      url: '%env(resolve:APP_HOST)%/saml/acs'
+      binding: 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST'
+    singleLogoutService:
+      url: '%env(resolve:APP_HOST)%/saml/logout'
+      binding: 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect'
+    x509cert: '%env(resolve:SAML_SP_X509CERT)%'
+    privateKey: '%env(resolve:SAML_SP_PRIVATEKEY)%'
+  # Optional settings
+  security:
+    nameIdEncrypted:       false
+    authnRequestsSigned:   true
+    logoutRequestSigned:   true
+    logoutResponseSigned:  true
+    wantMessagesSigned:    true
+    wantAssertionsSigned:  true
+    wantNameIdEncrypted:   false
+    requestedAuthnContext: false
+    signMetadata: true
+    wantXMLValidation: true
+    signatureAlgorithm: 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256'
