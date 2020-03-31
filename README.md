@@ -35,8 +35,6 @@ The project relies on environment variables to personalize its behavior
 | `MONOLOG_MAIN_PATH` | `%kernel.logs_dir%/%kernel.environment%.log` | Monolog main handler path. Useful in docker to set `php://stderr` |
 | `MONOLOG_DEPRECIATION_PATH` | `%kernel.logs_dir%/%kernel.environment%.deprecations.log` | Monolog depreciation handler path. Useful in docker to set `php://stderr` |
 | `CORS_ALLOW_ORIGIN` | <code>^https?://\(localhost&#124;127\.0\.0\.1)(:[0-9]+)?$</code> | Control the CORS access origin header value |
-| `CORS_ALLOW_HEADERS` | `["Content-Type", "Authorization"]` | Control the CORS allow headers header value |
-| `CORS_EXPOSE_HEADERS` | `["Link"]` | Control the CORS expose headers header value |
 | `ERROR_REDIRECT` | `false` | If true, redirect to `ERROR_AUTHORIZATION_REDIRECT_HOST` or `ERROR_DEFAULT_REDIRECT_HOST` on error |
 | `ERROR_AUTHORIZATION_REDIRECT_HOST` | ~ | URL to redirect in case of authentication or authorization error if `ERROR_REDIRECT` is `true` |
 | `ERROR_DEFAULT_REDIRECT_HOST` | ~ | URL to redirect in case of other errors if `ERROR_REDIRECT` is `true` |

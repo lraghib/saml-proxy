@@ -3,8 +3,13 @@ nelmio_cors:
         origin_regex: true
         allow_origin: ['%env(CORS_ALLOW_ORIGIN)%']
         allow_methods: ['GET', 'OPTIONS', 'POST', 'PUT', 'PATCH', 'DELETE']
-        allow_headers: '%env(json:CORS_ALLOW_HEADERS)%'
-        expose_headers: '%env(json:CORS_EXPOSE_HEADERS)%'
+        allow_headers: ["Content-Type", "Authorization", "Accept"]
+        expose_headers:
+            - "Link"
+            - "x-pagination-total-count"
+            - "x-pagination-page-count"
+            - "x-pagination-current-page"
+            - "x-pagination-per-page"
         max_age: 3600
     paths:
         '^/': null
