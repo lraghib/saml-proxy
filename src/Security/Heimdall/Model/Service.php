@@ -32,7 +32,7 @@ class Service
     protected $type;
 
     /**
-     * @var Portal
+     * @var Portal|null
      */
     protected $portal;
 
@@ -142,18 +142,18 @@ class Service
     }
 
     /**
-     * @return Portal
+     * @return Portal|null
      */
-    public function getPortal(): Portal
+    public function getPortal(): ?Portal
     {
         return $this->portal;
     }
 
     /**
-     * @param Portal $portal
+     * @param Portal|null $portal
      * @return self
      */
-    public function setPortal(Portal $portal): self
+    public function setPortal(?Portal $portal): self
     {
         $this->portal = $portal;
 

@@ -127,6 +127,10 @@ class User implements UserInterface
         }
 
         foreach ($this->getServices() as $service) {
+            if (!$service->getPortal()) {
+                continue;
+            }
+
             $roles[] = sprintf(
                 '%s%s_%s',
                 self::ROLE_PREFIX,
