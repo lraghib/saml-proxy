@@ -60,5 +60,5 @@ You can send it into your private repository like this :
 ```
 export SMAL_PROXY_VERSION=<version>
 export MY_PRIVATE_REPO=<private-repo>
-docker tag 3slab-saml-proxy $MY_PRIVATE_REPO/simple-nginx-video-arcgis-server:$SMAL_PROXY_VERSION && docker push $MY_PRIVATE_REPO/simple-nginx-video-arcgis-server:$SMAL_PROXY_VERSION
+docker tag 3slab-saml-proxy $MY_PRIVATE_REPO/3slab-saml-proxy:$SMAL_PROXY_VERSION && docker push $MY_PRIVATE_REPO/3slab-saml-proxy:$SMAL_PROXY_VERSION
 ```
