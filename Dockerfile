@@ -21,7 +21,6 @@ ENV RUN_SCRIPTS=1
 ENV SKIP_COMPOSER=true
 
 RUN cd /var/www/html \
-    && composer install --no-interaction --no-scripts -n \
-    && composer clearcache -n
+    && composer install --no-interaction --no-scripts -n
 
 COPY external-conf/api.conf /etc/nginx/sites-enabled/api.conf
