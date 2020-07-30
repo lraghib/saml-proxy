@@ -41,7 +41,7 @@ class UserProvider implements UserProviderInterface
     {
         $user = $this->heimdall->getUserByLdapUidNumber($username);
         if (!$user) {
-            $this->logger->debug(sprintf('User %s not found', $username));
+            $this->logger->warning(sprintf('User %s not found', $username));
             throw new UsernameNotFoundException(sprintf('User %s not found', $username));
         }
 
@@ -49,7 +49,7 @@ class UserProvider implements UserProviderInterface
             $userContracts = $this->heimdall->getUserContracts($user);
             $user->setUserContracts($userContracts);
         } catch (\Exception $e) {
-            $this->logger->debug(
+            $this->logger->warning(
                 sprintf('Exception occurred when loading user %s permissions : %s', $username, $e->getMessage())
             );
             throw $e;
