@@ -24,6 +24,7 @@ The project relies on environment variables to personalize its behavior
 | `APP_HOST` | `http://localhost:4000` | Hostname of this proxy app (mainly used to reference itself as a service provider |
 | `SAML_IDP_HOST` | `http://localhost:8443` | SAML IDP hostname |
 | `SAML_USERNAME_ATTRIBUTE` | `entryUUID` | SAML username attribute |
+| `SAML_GROUP_ATTRIBUTE` | `groups` | SAML groups attribute (contains name of the groups the user is member of in the saml identity provider. It adds roles to the SF user `ROLE_GROUP_{uppercase(group name)}`) |
 | `SAML_IDP_METADATA_URI` | `simplesaml/saml2/idp/metadata.php` | URI of the IDP metadata |
 | `SAML_IDP_SSO_URI` | `simplesaml/saml2/idp/SSOService.php` | Single Sign On URI of the IDP |
 | `SAML_IDP_SLO_URI` | `simplesaml/saml2/idp/SingleLogoutService.php` | Single Log Out URI of the IDP |

@@ -24,14 +24,21 @@ class UserProvider implements UserProviderInterface
     protected $logger;
 
     /**
+     * @var string
+     */
+    protected $samlGroupAttribute;
+
+    /**
      * UserProvider constructor.
      * @param HeimdallClient $heimdall
      * @param LoggerInterface|null $logger
+     * @param string $samlGroupAttribute
      */
-    public function __construct(HeimdallClient $heimdall, LoggerInterface $logger)
+    public function __construct(HeimdallClient $heimdall, LoggerInterface $logger, string $samlGroupAttribute)
     {
         $this->heimdall = $heimdall;
         $this->logger = $logger;
+        $this->samlGroupAttribute = $samlGroupAttribute;
     }
 
     /**
@@ -54,6 +61,8 @@ class UserProvider implements UserProviderInterface
             );
             throw $e;
         }
+
+        $user->setSamlGroupAttribute($this->samlGroupAttribute);
 
         return $user;
     }

@@ -4,8 +4,9 @@
 namespace App\Security\Heimdall\Model;
 
 use Symfony\Component\Security\Core\User\UserInterface;
+use Hslavich\OneloginSamlBundle\Security\User\SamlUserInterface;
 
-class User implements UserInterface
+class User implements UserInterface, SamlUserInterface
 {
     use CreatedUpdatedDeletedTrait;
 
@@ -77,6 +78,20 @@ class User implements UserInterface
     protected $userContracts = [];
 
     /**
+     * Filled by injection in heimdall user provider
+     *
+     * @var string|null
+     */
+    protected $samlGroupAttribute;
+
+    /**
+     * Filled by setSamlAttributes with hslavitch onelogin bundle
+     *
+     * @var string[]
+     */
+    protected $samlGroupRoles = [];
+
+    /**
      * @return string
      */
     public function getId(): string
@@ -125,6 +140,8 @@ class User implements UserInterface
         if ($this->getType()) {
             $roles[] = sprintf('%s%s', self::ROLE_PREFIX, strtoupper($this->getType()));
         }
+
+        $roles = array_merge($roles, $this->getSamlGroupRoles());
 
         foreach ($this->getServices() as $service) {
             if (!$service->getPortal()) {
@@ -383,5 +400,64 @@ class User implements UserInterface
         return (array) array_map(function (ContractService $contractService) {
             return $contractService->getService();
         }, $this->getContractServices());
+    }
+
+    /**
+     * @param array $attributes
+     */
+    public function setSamlAttributes(array $attributes)
+    {
+        if (!$this->samlGroupAttribute) {
+            return;
+        }
+
+        if (empty($attributes[$this->samlGroupAttribute])) {
+            return;
+        }
+
+        foreach ($attributes[$this->samlGroupAttribute] as $group) {
+            $role = sprintf('%sGROUP_%s', self::ROLE_PREFIX, strtoupper($group));
+            $this->addSamlGroupRole($role);
+        }
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSamlGroupAttribute(): ?string
+    {
+        return $this->samlGroupAttribute;
+    }
+
+    /**
+     * @param string|null $samlGroupAttribute
+     */
+    public function setSamlGroupAttribute(?string $samlGroupAttribute): void
+    {
+        $this->samlGroupAttribute = $samlGroupAttribute;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getSamlGroupRoles(): array
+    {
+        return $this->samlGroupRoles;
+    }
+
+    /**
+     * @param string[] $samlGroupRoles
+     */
+    public function setSamlGroupRoles(array $samlGroupRoles): void
+    {
+        $this->samlGroupRoles = $samlGroupRoles;
+    }
+
+    /**
+     * @param string $role
+     */
+    public function addSamlGroupRole(string $role): void
+    {
+        $this->samlGroupRoles[] = $role;
     }
 }

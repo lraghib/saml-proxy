@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     saml.default_target_path: '%env(resolve:SAML_DEFAULT_TARGET_PATH)%'
+    saml.group_attribute: '%env(resolve:SAML_GROUP_ATTRIBUTE)%'
     backend.user_role: '%env(resolve:BACKEND_USER_ROLE)%'
 
     error.redirect: '%env(bool:ERROR_REDIRECT)%'
@@ -23,6 +24,7 @@ services:
             $errorAuthorizationRedirectHost: '%error.authorization_redirect_host%'
             $errorDefaultRedirectHost: '%error.default_redirect_host%'
             $backendHeaders: '%backend.headers%'
+            $samlGroupAttribute: '%saml.group_attribute%'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
