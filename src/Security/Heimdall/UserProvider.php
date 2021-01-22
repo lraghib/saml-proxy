@@ -46,7 +46,13 @@ class UserProvider implements UserProviderInterface
      */
     public function loadUserByUsername($username)
     {
-        $user = $this->heimdall->getUserByLdapUidNumber($username);
+        try {
+            $user = $this->heimdall->getUserByLdapUidNumber($username);
+        } catch (\Exception $e) {
+            $this->logger->error(sprintf('Get user %s from session not found. Origin : %s', $username,$e->getMessage()));
+            throw $e;
+        }
+        
         if (!$user) {
             $this->logger->warning(sprintf('User %s not found', $username));
             throw new UsernameNotFoundException(sprintf('User %s not found', $username));
