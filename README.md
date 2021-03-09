@@ -40,7 +40,7 @@ The project relies on environment variables to personalize its behavior
 | `ERROR_REDIRECT` | `false` | If true, redirect to `ERROR_AUTHORIZATION_REDIRECT_HOST` or `ERROR_DEFAULT_REDIRECT_HOST` on error |
 | `ERROR_AUTHORIZATION_REDIRECT_HOST` | ~ | URL to redirect in case of authentication or authorization error if `ERROR_REDIRECT` is `true` |
 | `ERROR_DEFAULT_REDIRECT_HOST` | ~ | URL to redirect in case of other errors if `ERROR_REDIRECT` is `true` |
-| `BACKEND_USER_ROLE` | `ROLE_USER` | The role the authenticated user needs to have to access the proxied service |
+| `BACKEND_USER_ROLE` | `ROLE_USER` | The role the authenticated user needs to have to access the proxied service. The role come from the User.userType associate like 'ROLE_{userType} |
 | `BACKEND_HOST` | `http://localhost:4010` | The host of the proxied service |
 | `BACKEND_HEADERS` | `[]` | Headers passed to call to the proxied service |
 | `HEIMDALL_HOST` | `http://localhost:4010` | Hostname of the heimdall service to load authenticated user roles and permissions |
