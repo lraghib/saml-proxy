@@ -42,7 +42,7 @@ class HeimdallClient
      */
     public function getUserByLdapUidNumber(string $ldapUidNumber): ?User
     {
-        $response = $this->heimdallClient->request('GET', sprintf(self::GET_USER_URL, $ldapUidNumber));
+        $response = $this->heimdallClient->request('GET', sprintf(self::GET_USER_URL, urlencode($ldapUidNumber)));
 
         $this->successOrException($response);
 
