@@ -17,6 +17,7 @@ ENV SKIP_COMPOSER=true
 COPY --from=composer:1 /usr/bin/composer /usr/bin/composer
 
 RUN cd /var/www/html \
+    && chmod a+w -R var \
     && composer install --no-interaction --no-scripts -n \
     && composer clearcache -n
 
