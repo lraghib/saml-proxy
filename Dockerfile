@@ -1,17 +1,10 @@
 FROM richarvey/nginx-php-fpm:1.6.0
 
 RUN apk add --no-cache --virtual .build-deps \
-    g++ make autoconf yaml-dev
-
-RUN pecl channel-update pecl.php.net
-
-RUN pecl install apcu \
-  && docker-php-ext-enable apcu
-
-RUN wget https://getcomposer.org/installer -O composer-setup.php \
-  && php ./composer-setup.php  --install-dir=/usr/local/bin \
-  && ln -s /usr/local/bin/composer.phar /usr/local/bin/composer \
-  && composer global require hirak/prestissimo
+    g++ make autoconf yaml-dev \
+    && pecl channel-update pecl.php.net \
+    && pecl install apcu \
+    && docker-php-ext-enable apcu
 
 COPY . /var/www/html
 WORKDIR /var/www/html
@@ -20,7 +13,11 @@ ENV SKIP_CHOWN=true
 ENV RUN_SCRIPTS=1
 ENV SKIP_COMPOSER=true
 
+# Install Composer
+COPY --from=composer:1 /usr/bin/composer /usr/bin/composer
+
 RUN cd /var/www/html \
+    && chmod a+w -R var \
     && composer install --no-interaction --no-scripts -n \
     && composer clearcache -n
 
