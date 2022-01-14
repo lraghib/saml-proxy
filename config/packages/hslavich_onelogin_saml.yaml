@@ -2,12 +2,12 @@ hslavich_onelogin_saml:
   # Basic settings
   baseurl: '%env(resolve:APP_HOST)%/saml'
   idp:
-    entityId: '%env(resolve:SAML_IDP_HOST)%/%env(resolve:SAML_IDP_METADATA_URI)%'
+    entityId: '%env(resolve:SAML_IDP_ENTITY_ID)%'
     singleSignOnService:
-      url: '%env(resolve:SAML_IDP_HOST)%/%env(resolve:SAML_IDP_SSO_URI)%'
+      url: '%env(resolve:SAML_IDP_SSO_URI)%'
       binding: 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect'
     singleLogoutService:
-      url: '%env(resolve:SAML_IDP_HOST)%/%env(resolve:SAML_IDP_SLO_URI)%'
+      url: '%env(resolve:SAML_IDP_SLO_URI)%'
       binding: 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect'
     x509cert: '%env(resolve:SAML_IDP_X509CERT)%'
   sp:
