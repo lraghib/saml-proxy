@@ -22,12 +22,12 @@ The project relies on environment variables to personalize its behavior
 | `APP_ENV` | `prod` | Symfony app environment |
 | `APP_SECRET` | `95cb0a072426016024b542abd05ba877` | Symfony app secret |
 | `APP_HOST` | `http://localhost:4000` | Hostname of this proxy app (mainly used to reference itself as a service provider |
-| `SAML_IDP_HOST` | `http://localhost:8443` | SAML IDP hostname |
 | `SAML_USERNAME_ATTRIBUTE` | `entryUUID` | SAML username attribute |
 | `SAML_GROUP_ATTRIBUTE` | `groups` | SAML groups attribute (contains name of the groups the user is member of in the saml identity provider. It adds roles to the SF user `ROLE_GROUP_{uppercase(group name)}`) |
 | `SAML_IDP_METADATA_URI` | `simplesaml/saml2/idp/metadata.php` | URI of the IDP metadata |
-| `SAML_IDP_SSO_URI` | `simplesaml/saml2/idp/SSOService.php` | Single Sign On URI of the IDP |
-| `SAML_IDP_SLO_URI` | `simplesaml/saml2/idp/SingleLogoutService.php` | Single Log Out URI of the IDP |
+| `SAML_IDP_ENTITY_ID` | `http://localhost:8443/simplesaml/saml2/idp/metadata.php` | Entity id of the IDP |
+| `SAML_IDP_SSO_URI` | `http://localhost:8443/simplesaml/saml2/idp/SSOService.php` | Single Sign On URI of the IDP |
+| `SAML_IDP_SLO_URI` | `http://localhost:8443/simplesaml/saml2/idp/SingleLogoutService.php` | Single Log Out URI of the IDP |
 | `SAML_IDP_X509CERT` | ~ | IDP X509 certificate content as a string |
 | `SAML_SP_X509CERT` | ~ | SP X509 certificate for this proxy app referenced in IDP |
 | `SAML_SP_PRIVATEKEY` | ~ | SP private key of the SP X509 certificate for this proxy app |
